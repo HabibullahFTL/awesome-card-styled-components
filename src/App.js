@@ -25,11 +25,11 @@ const App = () => {
     <div className="container mt-5">
       <UserList data={displayUsersData} />
       <ReactPaginate
-        nextLabel="&laquo;"
+        nextLabel="&raquo;"
         previousLabel="&laquo;"
         pageCount={pageCount}
         onPageChange={handlePageChange}
-        containerClassName="pagination"
+        containerClassName="mt-3 pagination"
         pageClassName="page-item"
         pageLinkClassName="page-link"
         activeClassName="page-item active"
