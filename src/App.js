@@ -1,46 +1,36 @@
 import React, { useState } from 'react';
-import ReactPaginate from 'react-paginate';
+import { ThemeProvider } from 'styled-components';
 import './App.css';
-import UserList from './components/UsersList/UserList';
-import jsonData from './mocData.json';
+import GlobalStyled from './components/styles/Global.styles';
+import Tutorial from './components/Tutorial';
 
 
 const App = () => {
-  const [users, setusers] = useState(jsonData.slice(0, 50))
-  const [pageNumber, setPageNumber] = useState(0)
+  const [themeName, setThemeName] = useState('dark');
 
-  const userPerPage = 5;
-  const usersVisited = pageNumber * userPerPage;
+  const darkThemeProperty = {
+    containerBG: '#262626',
+    cardContainerBG: '#1e1e1e',
+    color: '#fff',
+    buttonLinkColor: '#aaa',
+    buttonLinkBorder: '#333',
+    buttonLinkAfterBG: '#262626',
+  }
 
-  const pageCount = Math.ceil(users.length / userPerPage);
-
-  const displayUsersData = users.slice(usersVisited, usersVisited + userPerPage)
-
-  // handling page number
-  const handlePageChange = ({ selected }) => {
-    setPageNumber(selected)
-  };
+  const lightThemeProperty = {
+    containerBG: '#f0f2f5',
+    cardContainerBG: '#fff',
+    color: '#111',
+    buttonLinkColor: '#111',
+    buttonLinkBorder: '#aaa',
+    buttonLinkAfterBG: '#111',
+  }
 
   return (
-    <div className="container mt-5">
-      <UserList data={displayUsersData} />
-      <ReactPaginate
-        nextLabel="&raquo;"
-        previousLabel="&laquo;"
-        pageCount={pageCount}
-        onPageChange={handlePageChange}
-        containerClassName="mt-3 pagination"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        activeClassName="page-item active"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-      />
-    </div>
+    <ThemeProvider theme={themeName === 'dark' ? darkThemeProperty : lightThemeProperty}>
+      <GlobalStyled />
+      <Tutorial setThemeName={setThemeName} />
+    </ThemeProvider>
   )
 }
 

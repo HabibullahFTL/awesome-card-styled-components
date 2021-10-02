@@ -1,5 +1,4 @@
-@media only print and (min-width: 500px) {
-    .custom-print {
-        background-color: #aaa;
-    }
+.bg-container {
+    width: 200px;
+    height: 200px;
 }
